@@ -6,49 +6,48 @@ import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.estock.company.dao.CompanyDao;
+import com.estock.company.dao.StockDao;
 import com.estock.company.exceptions.ApplicationException;
 import com.estock.company.model.Company;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class CompanyService {
 	@Autowired
-	CompanyDao companydao;
+	CompanyDao companyDao;
+	@Autowired
+	StockDao stockDao;
 
 	public String registerCompany(Company request) {
-		if (companydao.existsById(request.getCompanyCode())) {
-			if (Stream.of(request.getCeo(), request.getCompanyName(), request.getStockExchange(), request.getTurnOver())
-					.allMatch(Objects::isNull)) {
-				return updateStockPrice(request);
-			} else
-				throw new ApplicationException("Company already registered");
+		if (companyDao.existsById(request.getCompanyCode())) {
+			throw new ApplicationException("Company already registered");
 		}
-
-		companydao.save(request);
+		log.info("adding the company details for {} in compnay DB ",request.getCompanyCode());
+		companyDao.save(request);
 		return "Company registered";
 	}
 
-	private String updateStockPrice(Company request) {
-		Company company = companydao.findById(request.getCompanyCode()).get();
-		company.setStockPrice(request.getStockPrice());
-		companydao.save(company);
-		return "updated stock price";
-	}
-
 	public Company getCompanybyId(Integer companyCode) {
-
-		return companydao.findById(companyCode).get();
+		log.info("getting company details by id for {} ",companyCode);
+		return companyDao.findById(companyCode).get();
 	}
 
 	public List<Company> getAllCompanies() {
-
-		return companydao.findAll();
+		log.info("getting all company details");
+		return companyDao.findAll();
 	}
 
+	@Transactional
 	public void deleteCompanyById(Integer companyCode) {
-		companydao.deleteById(companyCode);
-
+		log.info("deleting company details for {}",companyCode);
+		companyDao.deleteById(companyCode);
+		log.info("deleting all stock details for {}",companyCode);
+		stockDao.deleteAllStockPricesByCompanyCode(companyCode);
 	}
 
 }
