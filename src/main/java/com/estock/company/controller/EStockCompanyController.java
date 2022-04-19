@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +27,7 @@ public class EStockCompanyController {
 	@Autowired
 	CompanyService companyservice;
 
+	@CrossOrigin
 	@PostMapping(value = "/company/register", consumes = { "application/json" })
 	public ResponseEntity<String> registerCompany(@RequestBody Company request) {
 
@@ -38,17 +40,20 @@ public class EStockCompanyController {
 				HttpStatus.CREATED);
 	}
 
+	@CrossOrigin
 	@GetMapping(value = "/company/info/{companyCode}")
 	public Company searchCompany(@PathVariable Integer companyCode) {
 		log.info("id : " + companyCode);
 		return companyservice.getCompanybyId(companyCode);
 	}
-
+	
+	@CrossOrigin
 	@GetMapping(value = "/company/getall")
 	public List<Company> allCompanies() {
 		return companyservice.getAllCompanies();
 	}
 
+	@CrossOrigin
 	@DeleteMapping(value = "/company/delete/{companyCode}")
 	public ResponseEntity<String> deleteCompany(@PathVariable Integer companyCode) {
 		log.info("id : " + companyCode);
