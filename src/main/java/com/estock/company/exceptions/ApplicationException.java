@@ -1,8 +1,7 @@
 package com.estock.company.exceptions;
 
-public class ApplicationException extends RuntimeException{
+public class ApplicationException extends RuntimeException {
 
-	
 	public ApplicationException(String message, Throwable cause) {
 		super(message, cause);
 		// TODO Auto-generated constructor stub

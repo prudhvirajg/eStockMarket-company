@@ -2,8 +2,6 @@ package com.estock.company.model;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.text.DecimalFormat;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

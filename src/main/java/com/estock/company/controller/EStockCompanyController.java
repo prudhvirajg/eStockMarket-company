@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -46,7 +45,7 @@ public class EStockCompanyController {
 		log.info("id : " + companyCode);
 		return companyservice.getCompanybyId(companyCode);
 	}
-	
+
 	@CrossOrigin
 	@GetMapping(value = "/company/getall")
 	public List<Company> allCompanies() {

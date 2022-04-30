@@ -1,42 +1,34 @@
 package com.estock.company.model;
 
-
-
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonRootName;
-
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
-@JsonIgnoreProperties(ignoreUnknown = true)	
-@Table(name="companies")
-public class Company {	
+@JsonIgnoreProperties(ignoreUnknown = true)
+@Table(name = "companies")
+public class Company {
 	@Id
-	@Column(name="companyCode")
+	@Column(name = "companyCode")
 	private Integer companyCode;
-	@Column(name="companyName")
+	@Column(name = "companyName")
 	private String companyName;
-	@Column(name="ceo")
+	@Column(name = "ceo")
 	private String ceo;
-	@Column(name="turnOver")
+	@Column(name = "turnOver")
 	private String turnOver;
-	@Column(name="website")
+	@Column(name = "website")
 	private String website;
-	@Column(name="stockExchange")
+	@Column(name = "stockExchange")
 	private String stockExchange;
-	@Column(name="stockPrice")
+	@Column(name = "stockPrice")
 	private float stockPrice;
-	
 
 }
