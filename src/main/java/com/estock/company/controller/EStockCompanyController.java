@@ -1,6 +1,7 @@
 package com.estock.company.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -60,6 +61,12 @@ public class EStockCompanyController {
 		companyservice.deleteCompanyById(companyCode);
 
 		return new ResponseEntity<String>("company deleted successfully", HttpStatus.OK);
+	}
+	@CrossOrigin
+	@GetMapping(value="/ping")
+	public ResponseEntity<Map<String, String>> ping(){
+		
+		return new ResponseEntity<Map<String,String>>( Map.of("Status","Up"),HttpStatus.OK);
 	}
 
 }
